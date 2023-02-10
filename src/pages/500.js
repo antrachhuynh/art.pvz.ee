@@ -34,7 +34,12 @@ export default function Custom500() {
 }
 
 // Next.js method to ensure a static page gets rendered
-export async function getStaticProps(res) {
+export async function getStaticProps(context) {
+  const { query } = context;
+  const { slug } = query;
+
+  const { res } = context;
+
   const targetURL = `https://art.pvz.ee/${slug}`;
   //const url = context.req.url ? context.req.url.replace('/posts/', '/') : '';
   await res.writeHead(307, { Location: targetURL });
