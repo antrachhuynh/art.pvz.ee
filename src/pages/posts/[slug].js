@@ -31,9 +31,7 @@ export async function getServerSideProps(context) {
   if (check !== false) {
     res.writeHead(307, { Location: targetURL });
     res.end();
-    return {
-      props: { isFacebook: true },
-    };
+   
   } else {
     const { post } = await getPostBySlug(context.params?.slug);
     if (!post) {
@@ -63,10 +61,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Post({ post, related, isFacebook }) {
-  if (isFacebook) {
-    return <a>hi</a>;
-  }
+export default function Post({ post, related }) {
 
   const {
     title,
