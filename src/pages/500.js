@@ -34,18 +34,7 @@ export default function Custom500() {
 }
 
 // Next.js method to ensure a static page gets rendered
-export async function getServerSideProps(context) {
-  const { query } = context;
-  const { slug } = query;
-
-  const { res } = context;
-
-  const mainURL = process.env.WORDPRESS_MAIN_URL ? process.env.WORDPRESS_MAIN_URL : '';
-  const targetURL = `${mainURL}${slug}`;
-  //const url = context.req.url ? context.req.url.replace('/posts/', '/') : '';
-  await res.writeHead(307, { Location: targetURL });
-  await res.end();
-
+export async function getStaticProps() {
   return {
     props: {},
   };
