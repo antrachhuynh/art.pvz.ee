@@ -25,7 +25,7 @@ export async function getServerSideProps(context) {
 
   const referer = context.req.headers?.referer;
   const { res } = context;
-  const targetURL = `https://art.pvz.ee/${slug}`; 
+  const targetURL = `https://art.pvz.ee/${slug}`;
 
   const check = /l.facebook.com|m.facebook.com|l.messenger.com|t.co/.test(referer);
   if (check !== false) {
