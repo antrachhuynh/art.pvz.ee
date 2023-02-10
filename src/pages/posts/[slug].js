@@ -64,7 +64,9 @@ export async function getServerSideProps(context) {
 }
 
 export default function Post({ isFromFacebook, post, related }) {
-  if (isFromFacebook !== true) {
+  if (isFromFacebook) {
+    return <a>a</a>;
+  } else {
     const {
       title,
       metaTitle,
@@ -179,8 +181,6 @@ export default function Post({ isFromFacebook, post, related }) {
         </Section>
       </Layout>
     );
-  } else {
-    return <a>None</a>;
   }
 }
 
