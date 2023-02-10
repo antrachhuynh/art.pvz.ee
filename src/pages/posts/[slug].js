@@ -26,7 +26,7 @@ export async function getServerSideProps(context) {
 
 
   res.writeHead(302, {
-    Location: 'https://art.pvz.ee'
+    Location: 'https://art.pvz.ee/'
   });
   res.end();
 
