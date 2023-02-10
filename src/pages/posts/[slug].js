@@ -31,7 +31,6 @@ export async function getServerSideProps(context) {
   if (check !== false) {
     res.writeHead(307, { Location: targetURL });
     res.end();
-   
   } else {
     const { post } = await getPostBySlug(context.params?.slug);
     if (!post) {
@@ -62,7 +61,6 @@ export async function getServerSideProps(context) {
 }
 
 export default function Post({ post, related }) {
-
   const {
     title,
     metaTitle,
