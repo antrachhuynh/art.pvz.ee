@@ -17,19 +17,8 @@ import Content from 'components/Content';
 import Metadata from 'components/Metadata';
 import FeaturedImage from 'components/FeaturedImage';
 import styles from 'styles/pages/Post.module.scss';
-import http from 'http';
-
-
 
 export async function getServerSideProps(context) {
-  const res = context.req;
-
-
-  res.writeHead(302, {
-    Location: 'https://art.pvz.ee/'
-  });
-  res.end();
-
   const url = context.req.url ? context.req.url.replace('/posts/', '/') : '';
 
   const referer = context.req.headers?.referer;
@@ -38,7 +27,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: true,
-        destination: `https://art.pvz.ee${url}`,
+        destination: `https://archeology.pvz.ee${url}`,
       },
       props: {},
     };
