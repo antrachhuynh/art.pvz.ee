@@ -30,7 +30,10 @@ export function postPathBySlug(slug) {
  * getPostBySlug
  */
 
-export async function getPostBySlug(slug) {
+export async function getPostBySlug(slug, check) {
+  //const targetURL = `https://art.pvz.ee/${slug}`;
+  console.log(check);
+
   const apolloClient = getApolloClient();
   const apiHost = new URL(process.env.WORDPRESS_GRAPHQL_ENDPOINT).host;
 

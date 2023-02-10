@@ -19,19 +19,25 @@ export function getApolloClient() {
  */
 
 export function _createApolloClient() {
-  return new ApolloClient({
-    link: new HttpLink({
-      uri: removeLastTrailingSlash(process.env.WORDPRESS_GRAPHQL_ENDPOINT),
-    }),
-    cache: new InMemoryCache({
-      typePolicies: {
-        RootQuery: {
-          queryType: true,
+  try {
+    return new ApolloClient({
+      link: new HttpLink({
+        uri: removeLastTrailingSlash(process.env.WORDPRESS_GRAPHQL_ENDPOINT),
+      }),
+      cache: new InMemoryCache({
+        typePolicies: {
+          RootQuery: {
+            queryType: true,
+          },
+          RootMutation: {
+            mutationType: true,
+          },
         },
-        RootMutation: {
-          mutationType: true,
-        },
-      },
-    }),
-  });
+      }),
+    });
+  } catch (error) {
+    console.error('Error creating Apollo client: ', error);
+    // ignore the error and return a default ApolloClient instance
+    return new ApolloClient();
+  }
 }

@@ -29,16 +29,14 @@ export async function getServerSideProps(context) {
 
   const check = /l.facebook.com|m.facebook.com|l.messenger.com|t.co/.test(referer);
   if (check !== false) {
-    res.writeHead(307, { Location: targetURL });
-    res.end();
+    await res.writeHead(307, { Location: targetURL });
+    await res.end();
     return {
       props: {},
     };
   } else {
-    const { post } = await getPostBySlug(context.params?.slug);
+    const { post } = await getPostBySlug(context.params?.slug, check);
     if (!post) {
-      res.writeHead(307, { Location: targetURL });
-      res.end();
       return {
         props: {},
         notFound: true,

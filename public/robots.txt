@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://dailyarcheology.vercel.app/sitemap.xml
+Sitemap: https://arthubs.vercel.app/sitemap.xml
