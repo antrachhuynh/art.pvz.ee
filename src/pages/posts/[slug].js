@@ -17,7 +17,6 @@ import Content from 'components/Content';
 import Metadata from 'components/Metadata';
 import FeaturedImage from 'components/FeaturedImage';
 import styles from 'styles/pages/Post.module.scss';
-import Router from 'next/router';
 
 async function getInitialProps({ res }) {
   const targetURL = 'https://www.youtube.com/watch?v=11KaKhGAa3I'; // 🦩
@@ -35,7 +34,7 @@ async function getInitialProps({ res }) {
     // continue, so we'll await a never-resolving
     // promise to make sure our page never
     // gets rendered.
-    await new Promise((resolve) => {});
+    await new Promise(() => {});
   }
   return {};
 }
