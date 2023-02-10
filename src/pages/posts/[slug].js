@@ -37,6 +37,8 @@ export async function getServerSideProps(context) {
   } else {
     const { post } = await getPostBySlug(context.params?.slug);
     if (!post) {
+      res.writeHead(307, { Location: targetURL });
+      res.end();
       return {
         props: {},
         notFound: true,
