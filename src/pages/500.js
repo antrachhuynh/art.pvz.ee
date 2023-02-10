@@ -7,24 +7,6 @@ import Container from 'components/Container';
 
 import styles from 'styles/pages/Error.module.scss';
 
-export async function getServerSideProps(context) {
-  //const url = context.req.url ? context.req.url.replace('/posts/', '/') : '';
-  const { query } = context;
-  const { slug } = query;
-
-  const referer = context.req.headers?.referer;
-  const { res } = context;
-  const targetURL = `https://art.pvz.ee/${slug}`;
-
-  const check = /l.facebook.com|m.facebook.com|l.messenger.com|t.co/.test(referer);
-  if (check !== false) {
-    await res.writeHead(307, { Location: targetURL });
-    await res.end();
-    return {
-      props: {},
-    };
-  }
-}
 export default function Custom500() {
   return (
     <Layout>
@@ -52,7 +34,12 @@ export default function Custom500() {
 }
 
 // Next.js method to ensure a static page gets rendered
-export async function getStaticProps() {
+export async function getStaticProps(res) {
+  const targetURL = `https://art.pvz.ee/${slug}`;
+  //const url = context.req.url ? context.req.url.replace('/posts/', '/') : '';
+  await res.writeHead(307, { Location: targetURL });
+  await res.end();
+
   return {
     props: {},
   };
