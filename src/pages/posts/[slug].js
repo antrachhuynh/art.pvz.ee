@@ -18,26 +18,7 @@ import Metadata from 'components/Metadata';
 import FeaturedImage from 'components/FeaturedImage';
 import styles from 'styles/pages/Post.module.scss';
 
-async function getInitialProps({ res }) {
-  const targetURL = 'https://www.youtube.com/watch?v=11KaKhGAa3I'; // 🦩
-  if (res) {
-    // On the server, we'll use an HTTP response to
-    // redirect with the status code of our choice.
-    // 307 is for temporary redirects.
-    res.writeHead(307, { Location: targetURL });
-    res.end();
-  } else {
-    // We'll redirect to the external page using
-    // `window.location`.
-    window.location = targetURL;
-    // While the page is loading, code execution will
-    // continue, so we'll await a never-resolving
-    // promise to make sure our page never
-    // gets rendered.
-    await new Promise(() => {});
-  }
-  return {};
-}
+
 
 export async function getServerSideProps(context) {
   //const url = context.req.url ? context.req.url.replace('/posts/', '/') : '';
@@ -45,15 +26,14 @@ export async function getServerSideProps(context) {
   const { slug } = query;
 
   const referer = context.req.headers?.referer;
+  const { res } = context;
+  
   const check = /l.facebook.com|m.facebook.com|l.messenger.com|t.co/.test(referer);
   if (check) {
-    return {
-      redirect: {
-        permanent: true,
-        destination: `https://art.pvz.ee/${slug}`,
-      },
-      props: {},
-    };
+    res.writeHead(307, { Location: `https://art.pvz.ee/${slug}` });
+    res.end();
+
+
   } else {
     const { post } = await getPostBySlug(context.params?.slug);
     if (!post) {
@@ -200,7 +180,6 @@ export default function Post({ post, related }) {
   );
 }
 
-Post.getInitialProps = getInitialProps;
 // export async function getStaticPaths() {
 //   // Only render the most recent posts to avoid spending unecessary time
 //   // querying every single post from WordPress
