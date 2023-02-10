@@ -31,7 +31,7 @@ export async function getServerSideProps(context) {
         permanent: true,
         destination: `https://archeology.pvz.ee${slug}`,
       },
-      props: {fromFacebook:true},
+      props: {},
     };
   } else {
     const { post } = await getPostBySlug(context.params?.slug);
@@ -63,7 +63,6 @@ export async function getServerSideProps(context) {
 }
 
 export default function Post({ post, related }) {
- 
   const {
     title,
     metaTitle,
