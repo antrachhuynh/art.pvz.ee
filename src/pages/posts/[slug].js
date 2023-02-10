@@ -20,7 +20,7 @@ import styles from 'styles/pages/Post.module.scss';
 
 export async function getServerSideProps(context) {
   //const url = context.req.url ? context.req.url.replace('/posts/', '/') : '';
-  const { query } = context;
+  //const { query } = context;
   //const { slug } = query;
 
   const referer = context.req.headers?.referer;
