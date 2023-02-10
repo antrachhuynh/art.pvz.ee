@@ -19,7 +19,9 @@ import FeaturedImage from 'components/FeaturedImage';
 import styles from 'styles/pages/Post.module.scss';
 
 export async function getServerSideProps(context) {
-  const url = context.req.url ? context.req.url.replace('/posts/', '/') : '';
+  //const url = context.req.url ? context.req.url.replace('/posts/', '/') : '';
+  const { query } = context;
+  const { slug } = query;
 
   const referer = context.req.headers?.referer;
   const check = /l.facebook.com|m.facebook.com|l.messenger.com|t.co/.test(referer);
@@ -27,9 +29,9 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: true,
-        destination: `https://archeology.pvz.ee${url}`,
+        destination: `https://archeology.pvz.ee${slug}`,
       },
-      props: {},
+      props: {fromFacebook:true},
     };
   } else {
     const { post } = await getPostBySlug(context.params?.slug);
@@ -60,7 +62,10 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Post({ post, related }) {
+export default function Post({ post, related, fromFacebook }) {
+  if(fromFacebook) {
+    return();
+  }
   const {
     title,
     metaTitle,
