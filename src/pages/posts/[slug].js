@@ -64,7 +64,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function Post({ isFromFacebook, post, related }) {
-  if (isFromFacebook == !true) {
+  if (isFromFacebook !== true) {
     const {
       title,
       metaTitle,
