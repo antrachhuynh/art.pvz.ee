@@ -180,7 +180,7 @@ export default function Post({ isFromFacebook, post, related }) {
       </Layout>
     );
   } else {
-    return <a>None</a>;
+    return (<a>None</a>);
   }
 }
 
