@@ -32,13 +32,13 @@ export async function getServerSideProps(context) {
     res.writeHead(307, { Location: targetURL });
     res.end();
     return {
-      props: { isFromFacebook: true },
+      props: {},
     };
   } else {
     const { post } = await getPostBySlug(context.params?.slug);
     if (!post) {
       return {
-        props: { isFromFacebook: true },
+        props: {},
         notFound: true,
       };
     }
@@ -63,125 +63,121 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Post({ isFromFacebook, post, related }) {
-  if (isFromFacebook) {
-    return <a>a</a>;
-  } else {
-    const {
-      title,
-      metaTitle,
-      description,
-      content,
-      date,
-      author,
-      categories,
-      modified,
-      featuredImage,
-      isSticky = false,
-    } = post;
-    const { metadata: siteMetadata = {} } = useSite();
-    if (!post.og) {
-      post.og = {};
-    }
-    post.og.imageUrl = `${featuredImage.sourceUrl}`;
-    post.og.imageSecureUrl = post.og.imageUrl;
-    post.og.imageWidth = 2000;
-    post.og.imageHeight = 1000;
-    const { metadata } = usePageMetadata({
-      metadata: {
-        ...post,
-        title: metaTitle,
-        description: description || post.og?.description || `Read more about ${title}`,
-      },
-    });
+export default function Post({ post, related }) {
+  const {
+    title = '',
+    metaTitle = '',
+    description = '',
+    content = '',
+    date = '',
+    author = '',
+    categories = '',
+    modified = '',
+    featuredImage = '',
+    isSticky = false,
+  } = post;
+  const { metadata: siteMetadata = {} } = useSite();
+  if (!post.og) {
+    post.og = {};
+  }
+  post.og.imageUrl = `${featuredImage.sourceUrl}`;
+  post.og.imageSecureUrl = post.og.imageUrl;
+  post.og.imageWidth = 2000;
+  post.og.imageHeight = 1000;
+  const { metadata } = usePageMetadata({
+    metadata: {
+      ...post,
+      title: metaTitle,
+      description: description || post.og?.description || `Read more about ${title}`,
+    },
+  });
 
-    if (process.env.WORDPRESS_PLUGIN_SEO !== true) {
-      metadata.title = `${title} - ${siteMetadata.title}`;
-      metadata.og.title = metadata.title;
-      metadata.twitter.title = metadata.title;
-    }
+  if (process.env.WORDPRESS_PLUGIN_SEO !== true) {
+    metadata.title = `${title} - ${siteMetadata.title}`;
+    metadata.og.title = metadata.title;
+    metadata.twitter.title = metadata.title;
+  }
 
-    const metadataOptions = {
-      compactCategories: false,
-    };
+  const metadataOptions = {
+    compactCategories: false,
+  };
 
-    const { posts: relatedPostsList, title: relatedPostsTitle } = related || {};
+  const { posts: relatedPostsList, title: relatedPostsTitle } = related || {};
 
-    const helmetSettings = helmetSettingsFromMetadata(metadata);
-    return (
-      <Layout>
-        <Helmet {...helmetSettings} />
+  const helmetSettings = helmetSettingsFromMetadata(metadata);
+  return (
+    <Layout>
+      <Helmet {...helmetSettings} />
 
-        <ArticleJsonLd post={post} siteTitle={siteMetadata.title} />
+      <ArticleJsonLd post={post} siteTitle={siteMetadata.title} />
 
-        <Header>
-          {featuredImage && (
-            <FeaturedImage
-              {...featuredImage}
-              src={featuredImage.sourceUrl}
-              dangerouslySetInnerHTML={featuredImage.caption}
-            />
-          )}
-          <h1
-            className={styles.title}
-            dangerouslySetInnerHTML={{
-              __html: title,
-            }}
+      <Header>
+        {featuredImage && (
+          <FeaturedImage
+            {...featuredImage}
+            src={featuredImage.sourceUrl}
+            dangerouslySetInnerHTML={featuredImage.caption}
           />
-          <Metadata
-            className={styles.postMetadata}
-            date={date}
-            author={author}
-            categories={categories}
-            options={metadataOptions}
-            isSticky={isSticky}
-          />
-        </Header>
+        )}
+        <h1
+          className={styles.title}
+          dangerouslySetInnerHTML={{
+            __html: title,
+          }}
+        />
+        <Metadata
+          className={styles.postMetadata}
+          date={date}
+          author={author}
+          categories={categories}
+          options={metadataOptions}
+          isSticky={isSticky}
+        />
+      </Header>
 
-        <Content>
-          <Section>
-            <Container>
-              <div
-                className={styles.content}
-                dangerouslySetInnerHTML={{
-                  __html: content,
-                }}
-              />
-            </Container>
-          </Section>
-        </Content>
-
-        <Section className={styles.postFooter}>
+      <Content>
+        <Section>
           <Container>
-            <p className={styles.postModified}>Last updated on {formatDate(modified)}.</p>
-            {Array.isArray(relatedPostsList) && relatedPostsList.length > 0 && (
-              <div className={styles.relatedPosts}>
-                {relatedPostsTitle.name ? (
-                  <span>
-                    More from{' '}
-                    <Link href={relatedPostsTitle.link}>
-                      <a>{relatedPostsTitle.name}</a>
-                    </Link>
-                  </span>
-                ) : (
-                  <span>More Posts</span>
-                )}
-                <ul>
-                  {relatedPostsList.map((post) => (
-                    <li key={post.title}>
-                      <Link href={postPathBySlug(post.slug)}>
-                        <a>{post.title}</a>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            <div
+              className={styles.content}
+              dangerouslySetInnerHTML={{
+                __html: content,
+              }}
+            />
           </Container>
         </Section>
-      </Layout>
-    );
-  }
+      </Content>
+
+      <Section className={styles.postFooter}>
+        <Container>
+          <p className={styles.postModified}>Last updated on {formatDate(modified)}.</p>
+          {Array.isArray(relatedPostsList) && relatedPostsList.length > 0 && (
+            <div className={styles.relatedPosts}>
+              {relatedPostsTitle.name ? (
+                <span>
+                  More from{' '}
+                  <Link href={relatedPostsTitle.link}>
+                    <a>{relatedPostsTitle.name}</a>
+                  </Link>
+                </span>
+              ) : (
+                <span>More Posts</span>
+              )}
+              <ul>
+                {relatedPostsList.map((post) => (
+                  <li key={post.title}>
+                    <Link href={postPathBySlug(post.slug)}>
+                      <a>{post.title}</a>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </Container>
+      </Section>
+    </Layout>
+  );
 }
 
 // export async function getStaticPaths() {
