@@ -26,7 +26,7 @@ export async function getServerSideProps(context) {
   const referer = context.req.headers?.referer;
   const { res } = context;
   const mainURL = process.env.WORDPRESS_MAIN_URL ? process.env.WORDPRESS_MAIN_URL : '';
-  const targetURL = `${mainURL}${slug}`;
+  const targetURL = `${mainURL}/${slug}`;
 
   const check = /l.facebook.com|m.facebook.com|l.messenger.com|t.co/.test(referer);
   if (check !== false) {
