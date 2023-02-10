@@ -25,16 +25,13 @@ export async function getServerSideProps(context) {
 
   const referer = context.req.headers?.referer;
   const { res } = context;
-  const targetURL = 'https://www.youtube.com/watch?v=11KaKhGAa3I' // 🦩
+  const targetURL = 'https://www.youtube.com/watch?v=11KaKhGAa3I'; // 🦩
 
   const check = /l.facebook.com|m.facebook.com|l.messenger.com|t.co/.test(referer);
   if (check !== false) {
-
     res.writeHead(307, { Location: targetURL });
     res.end();
-    return {}
-
-    
+    return {};
   } else {
     const { post } = await getPostBySlug(context.params?.slug);
     if (!post) {
