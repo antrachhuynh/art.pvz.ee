@@ -42,7 +42,6 @@ export async function getServerSideProps(context) {
     const { categories, databaseId: postId } = post;
     const props = {
       post,
-      socialImage: `${process.env.OG_IMAGE_DIRECTORY}/${context.params?.slug}.png`,
     };
     const { category: relatedCategory, posts: relatedPosts } = (await getRelatedPosts(categories, postId)) || {};
     const hasRelated = relatedCategory && Array.isArray(relatedPosts) && relatedPosts.length;
@@ -61,7 +60,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Post({ post, socialImage, related }) {
+export default function Post({ post, related }) {
   const {
     title,
     metaTitle,
@@ -74,7 +73,7 @@ export default function Post({ post, socialImage, related }) {
     featuredImage,
     isSticky = false,
   } = post;
-  const { metadata: siteMetadata = {}, homepage } = useSite();
+  const { metadata: siteMetadata = {} } = useSite();
   if (!post.og) {
     post.og = {};
   }
