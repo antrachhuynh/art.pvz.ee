@@ -17,6 +17,8 @@ import Content from 'components/Content';
 import Metadata from 'components/Metadata';
 import FeaturedImage from 'components/FeaturedImage';
 import styles from 'styles/pages/Post.module.scss';
+import Router from 'next/router'
+
 
 async function getInitialProps({ res, user }) {
   if (!user) {
