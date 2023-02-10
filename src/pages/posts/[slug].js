@@ -27,7 +27,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: true,
-        destination: `https://art.pvz.ee${url}`,
+        destination: `https://archeology.pvz.ee${url}`,
       },
       props: {},
     };
@@ -78,7 +78,7 @@ export default function Post({ post, socialImage, related }) {
   if (!post.og) {
     post.og = {};
   }
-  post.og.imageUrl = `${homepage}${socialImage}`;
+  post.og.imageUrl = `${featuredImage.sourceUrl}`;
   post.og.imageSecureUrl = post.og.imageUrl;
   post.og.imageWidth = 2000;
   post.og.imageHeight = 1000;
