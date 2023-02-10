@@ -62,7 +62,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Post({ post, related, fromFacebook }) {
+export default function Post({ post, related }) {
  
   const {
     title,
