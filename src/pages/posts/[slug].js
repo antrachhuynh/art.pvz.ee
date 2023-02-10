@@ -27,7 +27,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: true,
-        destination: `https://archeology.pvz.ee${url}`,
+        destination: `https://art.pvz.ee${url}`,
       },
       props: {},
     };
