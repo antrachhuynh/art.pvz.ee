@@ -1,7 +1,9 @@
 import Router from 'next/router';
 
 function Error({ url }) {
-  Router.push(`https://your-wordpress-site.com/${url}`);
+  const mainURL = process.env.WORDPRESS_MAIN_URL ? process.env.WORDPRESS_MAIN_URL : '';
+
+  Router.push(`${mainURL}/${url}`);
 
   return null;
 }
