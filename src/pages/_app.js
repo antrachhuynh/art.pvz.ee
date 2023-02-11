@@ -20,7 +20,6 @@ function App({ Component, pageProps = {}, metadata, recentPosts, categories, men
     categories,
     menus,
   });
-
   return (
     <SiteContext.Provider value={site}>
       <SearchProvider>

@@ -1,9 +1,7 @@
-function Error({ statusCode }) {
-  if (statusCode === 500 || statusCode === 503) {
-    window.location.replace('https://your-wordpress-site.com');
-  }
+import React from 'react';
 
-  return <p>An error {statusCode} occurred on the server</p>;
+function Error({ statusCode }) {
+  return <div>{statusCode ? `An error ${statusCode} occurred on server` : 'An error occurred on client'}</div>;
 }
 
 Error.getInitialProps = ({ res, err }) => {
