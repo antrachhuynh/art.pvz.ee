@@ -43,6 +43,11 @@ export async function getPostBySlug(slug, check) {
   try {
     postData = await apolloClient.query({
       query: QUERY_POST_BY_SLUG,
+      onError: ({ networkError }) => {
+        if (networkError?.statusCode === 403) {
+          console.log('Loi 403');
+        }
+      },
       variables: {
         slug,
       },

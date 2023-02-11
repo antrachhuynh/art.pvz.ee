@@ -1,8 +1,8 @@
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, HttpLink, InMemoryCache, from } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 
 import { removeLastTrailingSlash } from 'lib/util';
 let client;
-import Router from 'next/router';
 
 /**
  * getApolloClient
@@ -20,11 +20,22 @@ export function getApolloClient() {
  */
 
 export function _createApolloClient() {
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+      graphQLErrors.forEach(({ message, locations, path }) =>
+        console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+      );
+
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  });
+
+  const httpLink = new HttpLink({
+    uri: removeLastTrailingSlash(process.env.WORDPRESS_GRAPHQL_ENDPOINT),
+  });
+
   try {
     return new ApolloClient({
-      link: new HttpLink({
-        uri: removeLastTrailingSlash(process.env.WORDPRESS_GRAPHQL_ENDPOINT),
-      }),
+      link: from([errorLink, httpLink]),
       cache: new InMemoryCache({
         typePolicies: {
           RootQuery: {
@@ -35,11 +46,6 @@ export function _createApolloClient() {
           },
         },
       }),
-      onError: ({ networkError }) => {
-        if (networkError?.statusCode === 403) {
-          Router.replace('https://example.com');
-        }
-      },
     });
   } catch (error) {
     console.error('Error creating Apollo client: ', error);

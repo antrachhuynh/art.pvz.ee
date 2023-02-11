@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://arthubs.vercel.app</loc>
-    <lastmod>2023-02-11T06:17:20.920Z</lastmod>
+    <lastmod>2023-02-11T17:01:07.034Z</lastmod>
   </url>
   <url>
     <loc>https://arthubs.vercel.app/sample-page/</loc>
@@ -10,6 +10,10 @@
     <lastmod>2023-02-09T21:23:14.000Z</lastmod>
   </url>
 
+  <url>
+    <loc>https://arthubs.vercel.app/posts/feel-the-beast-by-unknow-artist/</loc>
+    <lastmod>2023-02-11T08:23:28.000Z</lastmod>
+  </url>
   <url>
     <loc>https://arthubs.vercel.app/posts/harry-pot-dog-by-arne-schroter/</loc>
     <lastmod>2023-02-11T00:33:59.000Z</lastmod>
@@ -407,9 +411,5 @@
   <url>
     <loc>https://arthubs.vercel.app/posts/animals-during-their-coffee-break-%f0%9f%a6%99/</loc>
     <lastmod>2023-02-10T05:12:42.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arthubs.vercel.app/posts/lets-test-your-taste-buds-%f0%9f%98%89-junkfoodsmoothies/</loc>
-    <lastmod>2023-02-10T05:12:36.000Z</lastmod>
   </url>
 </urlset>
