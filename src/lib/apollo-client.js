@@ -4,7 +4,6 @@ import { removeLastTrailingSlash } from 'lib/util';
 let client;
 import Router from 'next/router';
 
-
 /**
  * getApolloClient
  */
