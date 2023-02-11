@@ -2,6 +2,8 @@ import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
 import { removeLastTrailingSlash } from 'lib/util';
 let client;
+import Router from 'next/router';
+
 
 /**
  * getApolloClient
@@ -34,6 +36,11 @@ export function _createApolloClient() {
           },
         },
       }),
+      onError: ({ networkError }) => {
+        if (networkError?.statusCode === 403) {
+          //Router.replace('https://example.com');
+        }
+      },
     });
   } catch (error) {
     console.error('Error creating Apollo client: ', error);
