@@ -4,11 +4,27 @@
         <description><![CDATA[Art World]]></description>
         <link>https://arthubs.vercel.app</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 10 Feb 2023 11:07:02 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 11 Feb 2023 06:17:19 GMT</lastBuildDate>
         <atom:link href="https://arthubs.vercel.app/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 10 Feb 2023 11:07:02 GMT</pubDate>
+        <pubDate>Sat, 11 Feb 2023 06:17:19 GMT</pubDate>
         <copyright><![CDATA[2023 Art World]]></copyright>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Harry Pot-Dog – By Arne Schröter]]></title>
+            <link>https://arthubs.vercel.app/posts/harry-pot-dog-by-arne-schroter</link>
+            <guid isPermaLink="false">https://arthubs.vercel.app/posts/harry-pot-dog-by-arne-schroter</guid>
+            <category><![CDATA[AI]]></category>
+            <dc:creator><![CDATA[art]]></dc:creator>
+            <pubDate>Sat, 11 Feb 2023 00:33:59 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Soul Of The Forest]]></title>
+            <link>https://arthubs.vercel.app/posts/soul-of-the-forest</link>
+            <guid isPermaLink="false">https://arthubs.vercel.app/posts/soul-of-the-forest</guid>
+            <category><![CDATA[AI]]></category>
+            <dc:creator><![CDATA[art]]></dc:creator>
+            <pubDate>Fri, 10 Feb 2023 15:35:38 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Teenage Mutant Ninja Turtles – By zanailab]]></title>
             <link>https://arthubs.vercel.app/posts/teenage-mutant-ninja-turtles-by-zanailab</link>
@@ -924,26 +940,6 @@
             <category><![CDATA[AI]]></category>
             <dc:creator><![CDATA[art]]></dc:creator>
             <pubDate>Fri, 10 Feb 2023 05:12:36 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[This is what DC Heroes in their ancient version would look like]]></title>
-            <description><![CDATA[This post was created with our nice and easy submission form. Create your post!
-]]></description>
-            <link>https://arthubs.vercel.app/posts/this-is-what-dc-heroes-in-their-ancient-version-would-look-like</link>
-            <guid isPermaLink="false">https://arthubs.vercel.app/posts/this-is-what-dc-heroes-in-their-ancient-version-would-look-like</guid>
-            <category><![CDATA[AI]]></category>
-            <dc:creator><![CDATA[art]]></dc:creator>
-            <pubDate>Fri, 10 Feb 2023 05:12:31 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Metamorphosis delicate pencil drawings]]></title>
-            <description><![CDATA[Less Ai hate that we will be facing..embrace the system it creates what you want to be making This post was created with our nice and easy submission form. Create your post!
-]]></description>
-            <link>https://arthubs.vercel.app/posts/metamorphosis-delicate-pencil-drawings</link>
-            <guid isPermaLink="false">https://arthubs.vercel.app/posts/metamorphosis-delicate-pencil-drawings</guid>
-            <category><![CDATA[AI]]></category>
-            <dc:creator><![CDATA[art]]></dc:creator>
-            <pubDate>Fri, 10 Feb 2023 05:12:18 GMT</pubDate>
         </item>
     </channel>
 </rss>
