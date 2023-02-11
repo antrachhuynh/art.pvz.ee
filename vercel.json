@@ -9,6 +9,24 @@
         "src": "server.js",
         "use": "@vercel/node"
       }
+    ],
+    "routes": [
+      {
+        "handle": "filesystem",
+        "src": "api/.*"
+      },
+      {
+        "handle": "filesystem",
+        "src": "static/.*"
+      },
+      {
+        "handle": "filesystem",
+        "src": "favicon.ico"
+      },
+      {
+        "handle": "next",
+        "src": ".*"
+      }
     ]
   }
   

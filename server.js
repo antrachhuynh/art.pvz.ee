@@ -1,8 +1,28 @@
 const express = require('express');
-const app = express();
+const next = require('next');
 
-app.use((res) => {
-  res.redirect(process.env.WORDPRESS_MAIN_URL);
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
+
+app.prepare().then(() => {
+  const server = express();
+
+  server.get('*', (req, res) => {
+    const { pathname, query } = req;
+
+    if (pathname === '/_error') {
+      const { statusCode, url } = query;
+      if (statusCode === '500' || statusCode === '503') {
+        res.redirect(`https://your-wordpress-site.com/${url}`);
+      }
+    }
+
+    return handle(req, res);
+  });
+
+  server.listen(3000, (err) => {
+    if (err) throw err;
+    console.log('> Ready on http://localhost:3000');
+  });
 });
-
-module.exports = app;
