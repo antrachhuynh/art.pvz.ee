@@ -4,7 +4,10 @@ const Error = ({ statusCode }) => {
 };
 
 Error.getInitialProps = ({ res }) => {
-  res.redirect('https://your-wordpress-site.com');
+  const mainURL = process.env.WORDPRESS_MAIN_URL ? process.env.WORDPRESS_MAIN_URL : '';
+  res.writeHead(307, { Location: mainURL });
+  res.end();
+
   return {};
 };
 
