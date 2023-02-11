@@ -5,14 +5,14 @@
   "license": "MIT",
   "author": "Grace",
   "scripts": {
-    "build": "node server.js",
-    "dev": "next dev",
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "cross-env NODE_ENV=production node server.js",
     "export": "next export",
     "format": "yarn lint --fix",
     "format:no-path": "yarn lint:no-path --fix",
     "lint": "eslint .",
     "lint:no-path": "eslint",
-    "start": "next start -p ${PORT:=3000}",
     "prepare": "husky install"
   },
   "lint-staged": {
