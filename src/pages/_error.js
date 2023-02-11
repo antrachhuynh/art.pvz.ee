@@ -1,16 +1,15 @@
-import Router from 'next/router';
+import React from 'react';
 
-function Error({ url }) {
-  const mainURL = process.env.WORDPRESS_MAIN_URL ? process.env.WORDPRESS_MAIN_URL : '';
+class ErrorPage extends React.Component {
+  static getInitialProps({ res, err }) {
+    const statusCode = res ? res.statusCode : err ? err.statusCode : null;
+    return { statusCode };
+  }
 
-  Router.push(`${mainURL}/${url}`);
-
-  return null;
+  render() {
+    const { statusCode } = this.props;
+    return <p>{statusCode ? `An lỗi ${statusCode} occurred on server` : 'An error occurred on client'}</p>;
+  }
 }
 
-Error.getInitialProps = ({ asPath }) => {
-  const url = asPath;
-  return { url };
-};
-
-export default Error;
+export default ErrorPage;
