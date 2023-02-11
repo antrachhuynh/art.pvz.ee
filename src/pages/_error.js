@@ -1,12 +1,20 @@
 import React from 'react';
 
-function Error({ statusCode }) {
-  return <div>{statusCode ? `An error ${statusCode} occurred on server` : 'An error occurred on client'}</div>;
-}
+const Custom500 = ({ statusCode, url }) => {
+  if (statusCode === 500 || statusCode === 503) {
+    window.location.href = `https://your-wordpress-site.com/${url}`;
+  }
+  return <div>Error {statusCode}</div>;
+};
 
-Error.getInitialProps = ({ res, err }) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+Custom500.getInitialProps = async ({ res, err }) => {
+  let statusCode = null;
+  if (res) {
+    statusCode = res.statusCode;
+  } else if (err) {
+    statusCode = err.statusCode;
+  }
   return { statusCode };
 };
 
-export default Error;
+export default Custom500;
