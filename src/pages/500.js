@@ -1,20 +1,21 @@
 import React from 'react';
 
-const Custom500 = ({ statusCode, url }) => {
-  if (statusCode === 500 || statusCode === 503) {
-    window.location.href = `https://your-wordpress-site.com/${url}`;
-  }
-  return <div>Error {statusCode}</div>;
+const Error = ({ statusCode }) => {
+  return (
+    <div>
+      <h1>An error occurred</h1>
+      <p>
+        Wre sorry, but an error occurred while trying to access this page. Please try again later or go to our{' '}
+        <a href="https://your-wordpress-site.com">WordPress site</a> for more information.
+      </p>
+      <p>Error code: {statusCode}</p>
+    </div>
+  );
 };
 
-Custom500.getInitialProps = async ({ res, err }) => {
-  let statusCode = null;
-  if (res) {
-    statusCode = res.statusCode;
-  } else if (err) {
-    statusCode = err.statusCode;
-  }
+Error.getInitialProps = ({ res, err }) => {
+  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
   return { statusCode };
 };
 
-export default Custom500;
+export default Error;
