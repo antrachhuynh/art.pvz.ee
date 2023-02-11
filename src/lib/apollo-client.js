@@ -38,7 +38,7 @@ export function _createApolloClient() {
       }),
       onError: ({ networkError }) => {
         if (networkError?.statusCode === 403) {
-          //Router.replace('https://example.com');
+          Router.replace('https://example.com');
         }
       },
     });
