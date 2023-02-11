@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "Grace",
   "scripts": {
-    "build": "next build",
+    "build": "node server.js",
     "dev": "next dev",
     "export": "next export",
     "format": "yarn lint --fix",
