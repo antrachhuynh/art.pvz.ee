@@ -1,2 +1,9 @@
+# *
 User-agent: *
-Sitemap: https://arthubs.vercel.app/sitemap.xml
+Allow: /
+
+# Host
+Host: https://masahiro.me
+
+# Sitemaps
+Sitemap: https://masahiro.me/sitemap.xml

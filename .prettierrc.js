@@ -1,12 +1,9 @@
 module.exports = {
-  singleQuote: true,
   printWidth: 120,
-  overrides: [
-    {
-      files: '*.scss',
-      options: {
-        singleQuote: false,
-      },
-    },
-  ],
+  tabWidth: 2,
+  singleQuote: true,
+  trailingComma: 'none',
+  semi: true,
+  parser: 'typescript',
+  jsxSingleQuote: true
 };

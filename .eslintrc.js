@@ -1,34 +1,36 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
-    node: true,
-  },
-  settings: {
-    react: {
-      version: 'detect',
-    },
+    es2021: true
   },
   extends: [
     'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:react/recommended',
-    'plugin:prettier/recommended',
-    'plugin:@next/next/recommended',
-    'next/core-web-vitals',
+    'plugin:react-hooks/recommended',
+    'prettier'
   ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
+    project: './tsconfig.json',
     ecmaVersion: 12,
     sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
   },
-  plugins: ['react'],
+  plugins: ['@typescript-eslint', 'react'],
   rules: {
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-    'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off',
-    '@next/next/no-img-element': 'off',
-  },
+    '@typescript-eslint/explicit-module-boundary-types': 2,
+    '@typescript-eslint/no-unsafe-assignment': 1,
+    '@typescript-eslint/no-unsafe-call': 1,
+    '@typescript-eslint/no-unsafe-member-access': 1,
+    '@typescript-eslint/no-unsafe-return': 1,
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    '@typescript-eslint/no-floating-promises': 0,
+    // 'react/no-children-prop': 0,
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off'
+  }
 };
