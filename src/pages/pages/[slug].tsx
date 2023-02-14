@@ -1,10 +1,10 @@
 import { PER_PAGE } from '@/constants';
 import { fetchPostSlugsUseCase, fetchPostsUseCase, Post } from '@/domain';
 import { Card, Layout, Pagination } from '@/presentation';
-import { GetServerSideProps, NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const page = Number(params?.slug) ?? 1;
   const offset = page === 1 ? 0 : PER_PAGE * page;
 
@@ -13,6 +13,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ params }) 
 
   const posts = await fetchPostsUseCase(PER_PAGE, offset);
   return { props: { posts, totalPage } };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const slugs = await fetchPostSlugsUseCase();
+  const pages = Math.round(slugs.length / PER_PAGE);
+  const paths = [...Array<number>(pages)].map((_, i) => `/pages/${i + 1}`);
+  return {
+    paths,
+    fallback: false
+  };
 };
 
 type Props = {
